@@ -14,6 +14,13 @@ public class Main implements IXposedHookLoadPackage {
         Log.i("Main", "handleLoadPackage: Hello world!");
         logPrint(lpparam);
         XposedBridge.log("Hello World!"); // 可以在日志模块中查看
+        IHook iHook = new HookZhuCeJi();
+        if (iHook.isThisPackageName(lpparam)) {
+            XposedBridge.log("is this packages=" + lpparam.packageName);
+            iHook.handleLoadPackage(lpparam);
+        } else {
+            XposedBridge.log("is not this packages=" + lpparam.packageName);
+        }
     }
 
     /**
