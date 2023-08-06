@@ -1,6 +1,5 @@
 package com.kika.testxposed;
 
-import android.content.pm.ApplicationInfo;
 import android.util.Log;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -10,13 +9,19 @@ import java.util.HashMap;
 public class Main implements IXposedHookLoadPackage {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        /*
-        public String packageName;
-        public String processName;
-        public ClassLoader classLoader;
-        public ApplicationInfo appInfo;
-        public boolean isFirstApplication;
-         */
+        Log.i("Main", "handleLoadPackage: Hello world!");
+        logPrint(lpparam);
+
+    }
+
+    /**
+     * public String packageName;
+     * public String processName;
+     * public ClassLoader classLoader;
+     * public ApplicationInfo appInfo;
+     * public boolean isFirstApplication;
+     */
+    private void logPrint(XC_LoadPackage.LoadPackageParam lpparam) {
         final HashMap<String, Object> map = new HashMap<>();
         map.put("packageName:", lpparam.packageName);
         map.put("processName", lpparam.processName);
