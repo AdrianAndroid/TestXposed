@@ -3,6 +3,8 @@ package com.kika.testxposed;
 import android.util.Log;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
+import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import java.util.HashMap;
 
@@ -11,7 +13,7 @@ public class Main implements IXposedHookLoadPackage {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         Log.i("Main", "handleLoadPackage: Hello world!");
         logPrint(lpparam);
-
+        XposedBridge.log("Hello World!"); // 可以在日志模块中查看
     }
 
     /**
