@@ -3,6 +3,7 @@ package com.kika.testxposed;
 import android.util.Log;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -23,6 +24,31 @@ public class Main implements IXposedHookLoadPackage {
         }
     }
 
+    private void test() {
+    }
+
+    /**
+     * 动态加载apk等文件
+     * @param lpparam
+     */
+    private void dynamicLoadClass(XC_LoadPackage.LoadPackageParam lpparam) {
+        XposedHelpers.findAndHookMethod(
+            ClassLoader.class,
+            "loadClass",
+            String.class,
+            new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    super.beforeHookedMethod(param);
+                }
+
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    super.afterHookedMethod(param);
+                }
+            }
+        );
+    }
     /**
      * public String packageName;
      * public String processName;
