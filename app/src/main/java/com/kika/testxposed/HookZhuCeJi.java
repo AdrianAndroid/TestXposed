@@ -10,12 +10,17 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.security.MessageDigest;
 
-public class HookZhuCeJi implements IHook {
+public class HookZhuCeJi extends HookImpl {
     final String packageName = "com.qianyu.zhuceji";
 
     @Override
     public boolean isThisPackageName(XC_LoadPackage.LoadPackageParam lpparam) {
         return packageName.equals(lpparam.packageName);
+    }
+
+    @Override
+    public String packageName() {
+        return null;
     }
 
     @Override

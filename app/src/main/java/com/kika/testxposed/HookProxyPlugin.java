@@ -8,10 +8,15 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 
-public class HookProxyPlugin implements IHook{
+public class HookProxyPlugin extends HookImpl{
     @Override
     public boolean isThisPackageName(XC_LoadPackage.LoadPackageParam lpparam) {
         return true;
+    }
+
+    @Override
+    public String packageName() {
+        return null;
     }
 
     @Override

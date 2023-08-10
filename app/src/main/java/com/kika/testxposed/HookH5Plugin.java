@@ -9,10 +9,15 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-public class HookH5Plugin implements IHook{
+public class HookH5Plugin extends HookImpl{
     @Override
     public boolean isThisPackageName(XC_LoadPackage.LoadPackageParam lpparam) {
         return true;
+    }
+
+    @Override
+    public String packageName() {
+        return null;
     }
 
     @Override

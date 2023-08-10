@@ -11,7 +11,7 @@ import java.net.InetAddress;
 /**
  * Hook 系统的一些方法
  */
-public class HookSystem implements IHook {
+public class HookSystem extends HookImpl {
     public static long isToLong(String strIp) {
         long[] ip = new long[4];
         int position1 = strIp.indexOf(".");
@@ -28,6 +28,11 @@ public class HookSystem implements IHook {
     @Override
     public boolean isThisPackageName(XC_LoadPackage.LoadPackageParam lpparam) {
         return true;
+    }
+
+    @Override
+    public String packageName() {
+        return null;
     }
 
     @Override

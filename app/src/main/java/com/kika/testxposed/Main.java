@@ -7,21 +7,39 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Main implements IXposedHookLoadPackage {
+    static final List<IHook> listHooks = new ArrayList<>();
+    static {
+        listHooks.add(new HookZhuCeJi());
+        listHooks.add(new HookComAstPlane());
+    }
+
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         Log.i("Main", "handleLoadPackage: Hello world!");
         logPrint(lpparam);
         XposedBridge.log("Hello World!"); // 可以在日志模块中查看
-        IHook iHook = new HookZhuCeJi();
-        if (iHook.isThisPackageName(lpparam)) {
-            XposedBridge.log("is this packages=" + lpparam.packageName);
-            iHook.handleLoadPackage(lpparam);
-        } else {
-            XposedBridge.log("is not this packages=" + lpparam.packageName);
+        for (IHook iHook : listHooks) {
+            final String appName = iHook.appName();
+            XposedBridge.log("==================");
+            XposedBridge.log("==================");
+            XposedBridge.log("====start=========");
+            XposedBridge.log("====start=========" + appName + "========");
+            if (iHook.isThisPackageName(lpparam)) {
+                XposedBridge.log("is this packages=" + lpparam.packageName);
+                iHook.handleLoadPackage(lpparam);
+            } else {
+                XposedBridge.log("is not this packages=" + lpparam.packageName);
+            }
+            XposedBridge.log("====end=========");
+            XposedBridge.log("==================");
+            XposedBridge.log("==================");
         }
+
     }
 
     private void test() {
