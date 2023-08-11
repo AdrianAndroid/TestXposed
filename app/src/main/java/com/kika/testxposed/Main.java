@@ -13,9 +13,17 @@ import java.util.List;
 
 public class Main implements IXposedHookLoadPackage {
     static final List<IHook> listHooks = new ArrayList<>();
+
     static {
         listHooks.add(new HookZhuCeJi());
         listHooks.add(new HookComAstPlane());
+        listHooks.add(new HookComYunHaoGeTanChiSheEGame());
+        listHooks.add(new HookComJuneGameDouDiZhu()); // 单机斗地主
+        listHooks.add(new HookComYoDo1Ctr2A4399_1()); // 割绳子
+        listHooks.add(new HookComYoDo1SkiSafari2TXYYB_01()); // 滑雪大冒险
+        for (IHook listHook : listHooks) {
+            XposedBridge.log("iHook register className -> " + listHook.getClass().getSimpleName());
+        }
     }
 
     @Override
@@ -47,6 +55,7 @@ public class Main implements IXposedHookLoadPackage {
 
     /**
      * 动态加载apk等文件
+     *
      * @param lpparam
      */
     private void dynamicLoadClass(XC_LoadPackage.LoadPackageParam lpparam) {
@@ -67,6 +76,7 @@ public class Main implements IXposedHookLoadPackage {
             }
         );
     }
+
     /**
      * public String packageName;
      * public String processName;
